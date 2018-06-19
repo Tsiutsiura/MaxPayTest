@@ -57,6 +57,7 @@ public class TestLoginAllCases extends General {
     @Test
     public void testLoginPositive() throws Exception {
 
+        first();
         LoginPage loginPage = new LoginPage(driver);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getEmailLocator()));

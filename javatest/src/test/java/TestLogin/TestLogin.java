@@ -28,7 +28,7 @@ public class TestLogin extends General {
     @Test
     @Parameters({  "tsiutsiura.test@gmail.com,Test12345"  })
     public void testLoginPositive(String email, String password) throws Exception {
-
+        first();
         LoginPage loginPage = new LoginPage(driver);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getEmailLocator()));
@@ -39,7 +39,7 @@ public class TestLogin extends General {
         Dashboard dashboard = loginPage.submitLoginPage();
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(dashboard.getControlLocator()));
-        assertEquals("You a still on Login page", "https://my-sandbox.maxpay.com/app.php#/app/dashboard", driver.getCurrentUrl().toString());
+        assertEquals("You a still on Login page", "https://my.maxpay.com/app.php#/app/dashboard", driver.getCurrentUrl().toString());
 
     }
     @Test
