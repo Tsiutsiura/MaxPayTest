@@ -12,11 +12,12 @@ public class LoginPage {
     private By emailLocator = By.id("login-email");
     private By passwordLocator = By.id("login-password");
     private By submitButtonLocator = By.xpath("//button[@class = 'btn btn-block btn-primary mheight-40 text-uppercase ng-binding']");
-
     private By errorEmailOrPasswordLocator = By.xpath("//p[text()='Некорректны пароль или email']");
-
     private By errorEmailLocator = By.id("login-email-error");
     private By errorPasswordLocator = By.id("login-password-error");
+
+    private By forgotLinkLocator = By.linkText("Забыли пароль?");
+
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -47,7 +48,9 @@ public class LoginPage {
         return errorPasswordLocator;
     }
 
-
+    public By getForgotLinkLocator() {
+        return forgotLinkLocator;
+    }
 
     public LoginPage typeEmail(String email) {
         driver.findElement(emailLocator).click();
@@ -61,17 +64,22 @@ public class LoginPage {
         return this;
     }
 
+    public ForgotPassword initiateForgotPassword(){
+        driver.findElement(forgotLinkLocator).click();
+        return new ForgotPassword(driver);
+    }
+
     public String errorEmailOrPassword() {
-        return  driver.findElement(errorEmailOrPasswordLocator).getText();
+        return driver.findElement(errorEmailOrPasswordLocator).getText();
     }
 
     public String errorEmail() {
-        return   driver.findElement(errorEmailLocator).getText().toString();
+        return driver.findElement(errorEmailLocator).getText().toString();
 
     }
 
     public String errorPassword() {
-      return  driver.findElement(errorPasswordLocator).getText().toString();
+        return driver.findElement(errorPasswordLocator).getText().toString();
 
     }
 

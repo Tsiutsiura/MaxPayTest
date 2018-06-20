@@ -12,9 +12,16 @@ public class Dashboard {
         this.driver = driver;
     }
 
+    private final String URL = "https://my.maxpay.com/app.php#/app/dashboard";
     private By controlLocator = By.xpath("//span[text() = 'Объем']");
 
     public By getControlLocator() {
         return controlLocator;
     }
+
+    public String getURL() {
+        return URL;
+    }
+
+
 }
