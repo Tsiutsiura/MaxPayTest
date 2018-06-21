@@ -12,7 +12,7 @@ public class LoginPage {
     private By emailLocator = By.id("login-email");
     private By passwordLocator = By.id("login-password");
     private By submitButtonLocator = By.xpath("//button[@class = 'btn btn-block btn-primary mheight-40 text-uppercase ng-binding']");
-    private By errorEmailOrPasswordLocator = By.xpath("//p[text()='Некорректны пароль или email']");
+    private By errorEmailOrPasswordLocator = By.xpath("//*[text()='Некорректны пароль или email']");
     private By errorEmailLocator = By.id("login-email-error");
     private By errorPasswordLocator = By.id("login-password-error");
 

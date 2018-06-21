@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import junitparams.Parameters;
 import org.testng.annotations.BeforeTest;
@@ -29,9 +30,7 @@ public class TestLogin extends General {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getEmailLocator()));
         loginPage.typeEmail(email);
-        System.out.println("Email:" + " '" + email + "'");
         loginPage.typePassword(password);
-        System.out.println("Password:" + " '" + password + "'");
         Dashboard dashboard = loginPage.submitLoginPage();
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(dashboard.getControlLocator()));
         assertEquals("You a still on Login page", dashboard.getURL(), driver.getCurrentUrl().toString());
@@ -40,8 +39,8 @@ public class TestLogin extends General {
 
     @Test
     @Parameters({
-            "\"\", \"Test\"",
-            "\"@#$%%^^_+\", \"Test\"",
+            ", Test",
+            "@#$%%^^_+, Test",
     })
     public void testLoginNegEmail(String email, String password) throws Exception {
         openPage();
@@ -59,27 +58,25 @@ public class TestLogin extends General {
     @Test
     @Parameters({
 
-            "\"\", \"\"",
-            "\"tsiutsiura1115@gmail.com\", \"\""
+            ", ",
+            "tsiutsiura1115@gmail.com, "
     })
     public void testLoginNegPassword(String email, String password) throws Exception {
         openPage();
         LoginPage loginPage = new LoginPage(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getEmailLocator()));
         loginPage.typeEmail(email);
-        System.out.println("Email:" + " '" + email + "'");
         loginPage.typePassword(password);
-        System.out.println("Password:" + " '" + password + "'");
         loginPage.submitLoginPage();
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loginPage.getErrorPasswordLocator()));
-        assertEquals("Error not matched in field email", "Некорректны пароль или email", loginPage.errorPassword().toString());
+        assertEquals("Error not matched in field email", "Пожалуйста, введите пароль", loginPage.errorPassword().toString());
 
     }
 
     @Test
     @Parameters({
-            "\"tsiutsiura\", \"Test\"",
-            "\"tsiutsiura@gmail.com\", \"Test12345\""
+            "test.tsiutsiura@gmail.com, Test", //correct email, incorrect password
+            "tsiutsiura@gmail.com, Test12345" // incorrect email, correct password
     })
 
     public void testLoginNegOneWrong(String email, String password) throws Exception {
@@ -88,9 +85,7 @@ public class TestLogin extends General {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getEmailLocator()));
         loginPage.typeEmail(email);
-        System.out.println("Email:" + " '" + email + "'");
         loginPage.typePassword(password);
-        System.out.println("Password:" + " '" + password + "'");
         loginPage.submitLoginPage();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getErrorEmailOrPasswordLocator()));
@@ -115,7 +110,7 @@ public class TestLogin extends General {
     @AfterTest
     public void tearDown() {
         //Close the browser
-        driver.quit();
+        driver.close();
         String verificationErrorString = verificationErrors.toString();
 
         if (!"".equals(verificationErrorString)) {
