@@ -2,7 +2,6 @@ package until;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entity.BaseEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -13,22 +12,22 @@ import java.io.IOException;
 
 public class BaseRequest<T> implements Initializable {
     private String urlRequest;
-    private T item ;
+    private Class<T> type;
+    private T item;
 
-    public BaseRequest(String urlRequest,Class<T> type) {
+    public BaseRequest(String urlRequest, Class<T> type) {
         this.urlRequest = urlRequest;
-        item = (T) type;
+        this.type = type;
     }
 
     public T getItem() {
         return item;
     }
 
-
-    public void Initialize() throws IOException {
+    public void execute() throws IOException {
         HttpUriRequest request = new HttpGet(urlRequest);
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
-        item = retrieveResourceFromResponse(response, (Class<T>) item);
+        item = retrieveResourceFromResponse(response, type);
     }
 
     private T retrieveResourceFromResponse(HttpResponse response, Class<T> clazz) throws IOException {

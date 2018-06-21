@@ -5,23 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Planet extends BaseEntity {
-    protected String name;
+    private String name;
     @JsonProperty("rotation_period")
-    protected int rotationPeriod;
+    private int rotationPeriod;
     @JsonProperty("orbital_period")
-    protected int orbitalPeriod;
-    protected int diameter;
-    protected String climate;
-    protected String gravity;
-    protected String terrain;
+    private int orbitalPeriod;
+    private int diameter;
+    private String climate;
+    private String gravity;
+    private String terrain;
     @JsonProperty ("surface_water")
-    protected int surfaceWater;
-    protected int population;
-    protected List<String> residents;
-    protected List<String> films;
-    protected String created;
-    protected String edited;
-    protected String url;
+    private int surfaceWater;
+    private int population;
+    @JsonProperty ("residents")
+    private List<String> residentUrls;
+    @JsonProperty("films")
+    private List<String> filmUrls;
 
     public  Planet(){ }
 
@@ -97,63 +96,36 @@ public class Planet extends BaseEntity {
         this.population = population;
     }
 
-    public List<String> getResidents() {
-        return residents;
+    public List<String> getResidentUrls() {
+        return residentUrls;
     }
 
-    public void setResidents(List<String> residents) {
-        this.residents = residents;
+    public void setResidentUrls(List<String> residentUrls) {
+        this.residentUrls = residentUrls;
     }
 
-    public List<String> getFilms() {
-        return films;
+    public List<String> getFilmUrls() {
+        return filmUrls;
     }
 
-    public void setFilms(List<String> films) {
-        this.films = films;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getEdited() {
-        return edited;
-    }
-
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setFilmUrls(List<String> filmUrls) {
+        this.filmUrls = filmUrls;
     }
 
     @Override
     public String toString() {
         return "Planet{" +
-                "name='" + name + '\n' +
-                ", \n rotation_period=" + rotationPeriod +
-                ", \n orbital_period=" + orbitalPeriod +
-                ", \n diameter=" + diameter +
-                ", \n climate='" + climate +
-                ", \n gravity='" + gravity +
-                ", \n terrain='" + terrain +
-                ", \n surface_water=" + surfaceWater +
-                ", \n population=" + population +
-                ", \n residents=" + residents +
-                ", \n films=" + films +
-                ", \n created='" + created +
-                ", \n edited='" + edited +
-                ", \n url='" + url +
+                "name='" + name + '\'' +
+                ", rotationPeriod=" + rotationPeriod +
+                ", orbitalPeriod=" + orbitalPeriod +
+                ", diameter=" + diameter +
+                ", climate='" + climate + '\'' +
+                ", gravity='" + gravity + '\'' +
+                ", terrain='" + terrain + '\'' +
+                ", surfaceWater=" + surfaceWater +
+                ", population=" + population +
+                ", residentUrls=" + residentUrls +
+                ", filmUrls=" + filmUrls +
                 '}';
     }
 }

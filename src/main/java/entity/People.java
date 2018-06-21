@@ -1,28 +1,31 @@
 package entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.List;
 
 public class People extends BaseEntity {
-    protected String name;
-    protected int height;
-    protected int mass;
+    private String name;
+    private int height;
+    private int mass;
     @JsonProperty("hair_color")
-    protected String hairСolor;
+    private String hairСolor;
     @JsonProperty("skin_color")
-    protected String skinColor;
+    private String skinColor;
     @JsonProperty("eye_color")
-    protected String eyeColor;
+    private String eyeColor;
     @JsonProperty("birth_year")
-    protected String birthYear;
-    protected String gender;
-    protected String homeworld;
-    protected List<String> films;
-    protected List<String> species;
-    protected List<String> vehicles;
-    protected List<String> starships;
+    private String birthYear;
+    private String gender;
+    private String homeworld;
+    @JsonProperty("filmUrls")
+    private List<String> filmUrls;
+    @JsonProperty("specieUrls")
+    private List<String> specieUrls;
+    @JsonProperty("vehicle")
+    private List<String> vehicleUrls;
+    @JsonProperty("starship")
+    private List<String> starshipUrls;
 
     public People() {
     }
@@ -101,61 +104,38 @@ public class People extends BaseEntity {
         this.homeworld = homeworld;
     }
 
-    public List<String> getFilms() {
-        return films;
+    public List<String> getFilmUrls() {
+        return filmUrls;
     }
 
-    public void setFilms(List<String> films) {
-        this.films = films;
+    public void setFilmUrls(List<String> filmUrls) {
+        this.filmUrls = filmUrls;
     }
 
-    public List<String> getSpecies() {
-        return species;
+    public List<String> getSpecieUrls() {
+        return specieUrls;
     }
 
-    public void setSpecies(List<String> species) {
-        this.species = species;
+    public void setSpecieUrls(List<String> specieUrls) {
+        this.specieUrls = specieUrls;
     }
 
-    public List<String> getVehicles() {
-        return vehicles;
+    public List<String> getVehicleUrls() {
+        return vehicleUrls;
     }
 
-    public void setVehicles(List<String> vehicles) {
-        this.vehicles = vehicles;
+    public void setVehicleUrls(List<String> vehicleUrls) {
+        this.vehicleUrls = vehicleUrls;
     }
 
-    public List<String> getStarships() {
-        return starships;
+    public List<String> getStarshipUrls() {
+        return starshipUrls;
     }
 
-    public void setStarships(List<String> starships) {
-        this.starships = starships;
+    public void setStarshipUrls(List<String> starshipUrls) {
+        this.starshipUrls = starshipUrls;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getEdited() {
-        return edited;
-    }
-
-    public void setEdited(String edited) {
-        this.edited = edited;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     @Override
     public String toString() {
@@ -169,13 +149,10 @@ public class People extends BaseEntity {
                 ", birthYear='" + birthYear + '\'' +
                 ", gender='" + gender + '\'' +
                 ", homeworld='" + homeworld + '\'' +
-                ", films=" + films +
-                ", species=" + species +
-                ", vehicles=" + vehicles +
-                ", starships=" + starships +
-                ", created='" + created + '\'' +
-                ", edited='" + edited + '\'' +
-                ", url='" + url + '\'' +
+                ", filmUrls=" + filmUrls +
+                ", specieUrls=" + specieUrls +
+                ", vehicleUrls=" + vehicleUrls +
+                ", starshipUrls=" + starshipUrls +
                 '}';
     }
 }

@@ -5,22 +5,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Film  extends BaseEntity {
-    protected String title;
+    private String title;
 
     @JsonProperty("episode_id")
-    protected int episodeId;
+    private int episodeId;
     @JsonProperty("opening_crawl")
-    protected String openingCrawl;
+    private String openingCrawl;
 
-    protected String director;
-    protected String producer;
+    private String director;
+    private String producer;
     @JsonProperty("release_date")
-    protected String releaseDate;
-
-    protected List<String> characters;
-    protected List<String> planets;
-    protected List<String> starships;
-    protected List<String> species;
+    private String releaseDate;
+    @JsonProperty("characters")
+    private List<String> characterUrls;
+    @JsonProperty("planets")
+    private List<String> planetUrls;
+    @JsonProperty("starships")
+    private List<String> starshipUrls;
+    @JsonProperty("species")
+    private List<String> specieUrls;
 
     public  Film(){ }
 
@@ -72,36 +75,36 @@ public class Film  extends BaseEntity {
         this.releaseDate = releaseDate;
     }
 
-    public List<String> getCharacters() {
-        return characters;
+    public List<String> getCharacterUrls() {
+        return characterUrls;
     }
 
-    public void setCharacters(List<String> characters) {
-        this.characters = characters;
+    public void setCharacterUrls(List<String> characterUrls) {
+        this.characterUrls = characterUrls;
     }
 
-    public List<String> getPlanets() {
-        return planets;
+    public List<String> getPlanetUrls() {
+        return planetUrls;
     }
 
-    public void setPlanets(List<String> planets) {
-        this.planets = planets;
+    public void setPlanetUrls(List<String> planetUrls) {
+        this.planetUrls = planetUrls;
     }
 
-    public List<String> getStarships() {
-        return starships;
+    public List<String> getStarshipUrls() {
+        return starshipUrls;
     }
 
-    public void setStarships(List<String> starships) {
-        this.starships = starships;
+    public void setStarshipUrls(List<String> starshipUrls) {
+        this.starshipUrls = starshipUrls;
     }
 
-    public List<String> getSpecies() {
-        return species;
+    public List<String> getSpecieUrls() {
+        return specieUrls;
     }
 
-    public void setSpecies(List<String> species) {
-        this.species = species;
+    public void setSpecieUrls(List<String> specieUrls) {
+        this.specieUrls = specieUrls;
     }
 
     @Override
@@ -113,10 +116,10 @@ public class Film  extends BaseEntity {
                 ", director='" + director + '\'' +
                 ", producer='" + producer + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
-                ", characters=" + characters +
-                ", planets=" + planets +
-                ", starships=" + starships +
-                ", species=" + species +
+                ", characterUrls=" + characterUrls +
+                ", planetUrls=" + planetUrls +
+                ", starshipUrls=" + starshipUrls +
+                ", specieUrls=" + specieUrls +
                 '}';
     }
 }
