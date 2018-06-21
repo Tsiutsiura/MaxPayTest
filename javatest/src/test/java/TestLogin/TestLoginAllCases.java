@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +22,7 @@ public class TestLoginAllCases extends General {
 
     private String email;
     private String password;
+    private String error;
 
     private static StringBuffer verificationErrors = new StringBuffer();
 
@@ -38,15 +40,16 @@ public class TestLoginAllCases extends General {
                         /* {"tsiutsiura.test@gmail.com", "Test12345"},  //valid email and password
                         {"tsiutsiura.test@gmail.com", "Test"}, //valid email and invalid password ,
                          {"tsiutsiura", "Test"},  //invalid email (without @) and invalid password*/
-                         {"tsiutsiura1115@gmail.com", "Test12345"} //invalid email (doesn't exist in system) and valid password
+                         {"tsiutsiura1115@gmail.com", "Test12345", "Некорректны пароль или email"} //invalid email (doesn't exist in system) and valid password
                 }
         );
 
     }
 
-    public TestLoginAllCases(String email, String password) {
+    public TestLoginAllCases(String email, String password, String error ) {
         this.email = email;
         this.password = password;
+        this.error = error;
     }
 
     @BeforeTest
@@ -68,10 +71,14 @@ public class TestLoginAllCases extends General {
         System.out.println("Password:" + " '" +password +"'");
         Dashboard dashboard =  loginPage.submitLoginPage();
 
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@text()='error'"))));
+
 
 //Проверить позитивный сценарий и "Некорректны пароль или email"
 
         try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getErrorEmailOrPasswordLocator()));
+            assertEquals("Error not matched, when problem with someone email or password", "Некорректны пароль или email", loginPage.errorEmailOrPassword().toString());
 
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loginPage.getErrorEmailLocator()));
             assertEquals("Error not matched in field email", "Пожалуйста, введите действующий email адрес", loginPage.errorEmail().toString());
@@ -79,12 +86,6 @@ public class TestLoginAllCases extends General {
 
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(loginPage.getErrorPasswordLocator()));
             assertEquals("Error not matched in field password", "Пожалуйста, введите пароль", loginPage.errorPassword().toString());
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getErrorEmailOrPasswordLocator()));
-            assertEquals("Error not matched, when problem with someone email or password", "Некорректны пароль или email", loginPage.errorEmailOrPassword().toString());
-
-           /* wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(dashboard.getControlLocator()));
-            assertEquals("You a still on Login page", "https://my-sandbox.maxpay.com/app.php#/app/dashboard", driver.getCurrentUrl().toString());*/
 
 
         } catch (NoSuchElementException e){

@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 
 public class General extends Assert {
     public General() {
@@ -27,4 +29,7 @@ public class General extends Assert {
         driver.get("https://my.maxpay.com/#/signin");
         driver.manage().window().maximize();
     }
+
+
+
 }
