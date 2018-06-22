@@ -1,4 +1,4 @@
-package Pages;
+package taskLoginPage.Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
