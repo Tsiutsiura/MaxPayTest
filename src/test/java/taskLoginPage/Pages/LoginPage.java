@@ -8,21 +8,24 @@ import static org.junit.Assert.assertEquals;
 public class LoginPage {
 
     private final WebDriver driver;
-
+    private final String URL = "https://my.maxpay.com/#/signin";
     private By emailLocator = By.id("login-email");
     private By passwordLocator = By.id("login-password");
     private By submitButtonLocator = By.xpath("//button[@class = 'btn btn-block btn-primary mheight-40 text-uppercase ng-binding']");
     private By errorEmailOrPasswordLocator = By.xpath("//*[text()='Некорректны пароль или email']");
     private By errorEmailLocator = By.id("login-email-error");
     private By errorPasswordLocator = By.id("login-password-error");
-
     private By forgotLinkLocator = By.linkText("Забыли пароль?");
+    private By signUpLinkLocator = By.linkText("Зарегистрироваться");
 
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    public String getURL() {
+        return URL;
+    }
 
     public By getEmailLocator() {
         return emailLocator;
@@ -69,25 +72,13 @@ public class LoginPage {
         return new ForgotPassword(driver);
     }
 
-    public String errorEmailOrPassword() {
-        return driver.findElement(errorEmailOrPasswordLocator).getText();
-    }
-
-    public String errorEmail() {
-        return driver.findElement(errorEmailLocator).getText().toString();
-
-    }
-
-    public String errorPassword() {
-        return driver.findElement(errorPasswordLocator).getText().toString();
-
-    }
-
-
-    public Dashboard submitLoginPage() {
+        public Dashboard submitLoginPage() {
         driver.findElement(submitButtonLocator).click();
         return new Dashboard(driver);
     }
-
+    public SignUp beginSignUp() {
+        driver.findElement(signUpLinkLocator).click();
+        return new SignUp(driver);
+    }
 
 }

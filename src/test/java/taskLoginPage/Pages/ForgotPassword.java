@@ -13,6 +13,7 @@ public class ForgotPassword {
     private final String URL = "https://my.maxpay.com/#/forgot";
     private By reminderEmailLocator = By.id("reminder-email");
     private By buttonResetPasswordLocator = By.xpath("//button[@type='submit']");
+    private By signInLocator = By.linkText("Войти");
 
     public String getURL() {
         return URL;
@@ -26,14 +27,21 @@ public class ForgotPassword {
         return buttonResetPasswordLocator;
     }
 
-    public ForgotPassword typeEmail(){
+    public ForgotPassword typeEmail(String email) {
         driver.findElement(reminderEmailLocator).click();
-        driver.findElement(reminderEmailLocator).sendKeys();
+        driver.findElement(reminderEmailLocator).sendKeys(email);
         return this;
     }
-    public ForgotPassword resetPassword (){
+
+    public ForgotPassword resetPassword() {
         driver.findElement(buttonResetPasswordLocator).click();
         return this;
     }
+
+    public LoginPage startSignIn (){
+        driver.findElement(signInLocator).click();
+        return new LoginPage(driver);
+    }
+
 
 }
