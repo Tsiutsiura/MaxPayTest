@@ -42,7 +42,7 @@ public class General extends Assert {
 
     }
 
-    @After
+   /* @After
     public void tearDown() {
         //Close the browser
         driver.close();
@@ -51,7 +51,7 @@ public class General extends Assert {
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
-    }
+    }*/
 
 
 }
